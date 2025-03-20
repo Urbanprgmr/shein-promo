@@ -8,7 +8,7 @@
     body {
       font-family: 'Arial', sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 0;
       background-image: url('https://res.cloudinary.com/dwe3nze5h/image/upload/v1742499083/IMG_0361_jeevuq.jpg'); /* Cloudinary URL */
       background-size: cover;
       background-position: center;
@@ -24,12 +24,12 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
     .container {
-      background: rgba(255, 255, 255, 0.9);
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       max-width: 500px;
       width: 100%;
+      background: transparent; /* Remove white background */
+      box-shadow: none; /* Remove shadow */
     }
     textarea, input, button {
       margin: 10px 0;
@@ -59,7 +59,7 @@
       padding: 0;
     }
     .user-list li, .winners-list li {
-      background: #f4f4f4;
+      background: rgba(255, 255, 255, 0.8); /* Slightly transparent background for readability */
       margin: 5px 0;
       padding: 10px;
       border-radius: 5px;
@@ -68,7 +68,7 @@
       align-items: center;
     }
     .winners-list li {
-      background: #d4edda;
+      background: rgba(212, 237, 218, 0.8); /* Slightly transparent background for readability */
     }
     .spinner {
       display: none;
@@ -85,7 +85,7 @@
       100% { transform: rotate(360deg); }
     }
     .reward-message {
-      background: #f8f9fa;
+      background: rgba(248, 249, 250, 0.8); /* Slightly transparent background for readability */
       padding: 10px;
       border-radius: 5px;
       margin: 10px 0;
