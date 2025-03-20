@@ -94,9 +94,26 @@ function drawWinners() {
   }
 
   const spinner = document.getElementById('spinner');
+  const winnersList = document.getElementById('winners');
   spinner.style.display = 'block';
+  winnersList.innerHTML = ''; // Clear previous winners
 
+  // Animation: Show random names for 3 seconds
+  const animationDuration = 3000; // 3 seconds
+  const startTime = Date.now();
+
+  const animationInterval = setInterval(() => {
+    const randomNames = [];
+    for (let i = 0; i < rewards.numWinners; i++) {
+      const randomIndex = Math.floor(Math.random() * users.length);
+      randomNames.push(users[randomIndex]);
+    }
+    winnersList.innerHTML = randomNames.map(name => `<li>${name}</li>`).join('');
+  }, 100); // Update names every 100ms
+
+  // Stop animation and display final winners after the duration
   setTimeout(() => {
+    clearInterval(animationInterval);
     const shuffledUsers = [...users].sort(() => 0.5 - Math.random()); // Shuffle users
     winners = shuffledUsers.slice(0, rewards.numWinners).map(user => ({
       name: user,
@@ -105,7 +122,15 @@ function drawWinners() {
     localStorage.setItem('winners', JSON.stringify(winners));
     renderWinners();
     spinner.style.display = 'none';
-  }, 2000); // 2-second animation
+  }, animationDuration);
+}
+
+// Render winners
+function renderWinners() {
+  const winnersList = document.getElementById('winners');
+  winnersList.innerHTML = winners.map(winner => `
+    <li>${winner.name} - MVR ${winner.reward.toFixed(2)}</li>
+  `).join('');
 }
 
 // Reset winners
