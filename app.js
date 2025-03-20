@@ -98,31 +98,35 @@ function drawWinners() {
   spinner.style.display = 'block';
   winnersList.innerHTML = ''; // Clear previous winners
 
-  // Animation: Show random names for 3 seconds
-  const animationDuration = 3000; // 3 seconds
+  // Animation: Show random names for 5 seconds
+  const animationDuration = 5000; // 5 seconds
   const startTime = Date.now();
 
   const animationInterval = setInterval(() => {
+    const elapsedTime = Date.now() - startTime;
+    const progress = elapsedTime / animationDuration; // Progress from 0 to 1
+    const speed = 100 - 90 * progress; // Slow down over time (100ms to 10ms)
+
     const randomNames = [];
     for (let i = 0; i < rewards.numWinners; i++) {
       const randomIndex = Math.floor(Math.random() * users.length);
       randomNames.push(users[randomIndex]);
     }
     winnersList.innerHTML = randomNames.map(name => `<li>${name}</li>`).join('');
-  }, 100); // Update names every 100ms
 
-  // Stop animation and display final winners after the duration
-  setTimeout(() => {
-    clearInterval(animationInterval);
-    const shuffledUsers = [...users].sort(() => 0.5 - Math.random()); // Shuffle users
-    winners = shuffledUsers.slice(0, rewards.numWinners).map(user => ({
-      name: user,
-      reward: rewards.rewardAmount
-    }));
-    localStorage.setItem('winners', JSON.stringify(winners));
-    renderWinners();
-    spinner.style.display = 'none';
-  }, animationDuration);
+    if (elapsedTime >= animationDuration) {
+      clearInterval(animationInterval);
+      const shuffledUsers = [...users].sort(() => 0.5 - Math.random()); // Shuffle users
+      winners = shuffledUsers.slice(0, rewards.numWinners).map(user => ({
+        name: user,
+        reward: rewards.rewardAmount
+      }));
+      localStorage.setItem('winners', JSON.stringify(winners));
+      renderWinners();
+      spinner.style.display = 'none';
+      showPopup(); // Show winners popup
+    }
+  }, 100); // Start with 100ms interval
 }
 
 // Render winners
@@ -131,6 +135,22 @@ function renderWinners() {
   winnersList.innerHTML = winners.map(winner => `
     <li>${winner.name} - MVR ${winner.reward.toFixed(2)}</li>
   `).join('');
+}
+
+// Show winners popup
+function showPopup() {
+  const popup = document.getElementById('popup');
+  const popupWinners = document.getElementById('popupWinners');
+  popupWinners.innerHTML = winners.map(winner => `
+    <li>${winner.name} - MVR ${winner.reward.toFixed(2)}</li>
+  `).join('');
+  popup.style.display = 'block';
+}
+
+// Close popup
+function closePopup() {
+  const popup = document.getElementById('popup');
+  popup.style.display = 'none';
 }
 
 // Reset winners
