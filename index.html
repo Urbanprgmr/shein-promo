@@ -9,7 +9,7 @@
       font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 20px;
-      background-image: url('https://res.cloudinary.com/dwe3nze5h/image/upload/v1742486729/IMG_0358_a367qu.jpg'); /* Cloudinary URL */
+      background-image: url('https://res.cloudinary.com/demo/image/upload/v1633456789/sample.jpg'); /* Cloudinary URL */
       background-size: cover;
       background-position: center;
       color: #333;
@@ -112,6 +112,29 @@
     .delete-btn:hover {
       background: #d32f2f;
     }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .pagination button {
+      margin: 0 5px;
+      padding: 5px 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .pagination button:hover {
+      background: #0056b3;
+    }
+    .pagination button.active {
+      background: #0056b3;
+    }
+    .search-bar {
+      margin-bottom: 10px;
+    }
     @media (max-width: 600px) {
       body {
         padding: 10px;
@@ -165,7 +188,11 @@
     <!-- User List Section -->
     <div class="user-list" id="userListSection">
       <h2>User List</h2>
+      <div class="search-bar">
+        <input type="text" id="searchUser" placeholder="Search users..." oninput="filterUsers()">
+      </div>
       <ul id="users"></ul>
+      <div class="pagination" id="pagination"></div>
     </div>
   </div>
 
