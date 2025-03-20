@@ -83,19 +83,8 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    .background-upload {
+    .background-url {
       margin-bottom: 20px;
-    }
-    .background-upload label {
-      background: #4caf50;
-      color: white;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      display: inline-block;
-    }
-    .background-upload input {
-      display: none;
     }
   </style>
 </head>
@@ -103,10 +92,10 @@
   <div class="container">
     <h1>Giveaway Winner Selector</h1>
 
-    <!-- Background Image Upload -->
-    <div class="background-upload">
-      <label for="bgUpload">Upload Background Image</label>
-      <input type="file" id="bgUpload" accept="image/*">
+    <!-- Set Background Image URL -->
+    <div class="background-url">
+      <input type="text" id="bgUrl" placeholder="Enter Cloudinary Image URL">
+      <button onclick="setBackground()">Set Background</button>
     </div>
 
     <!-- Add Users Section -->
