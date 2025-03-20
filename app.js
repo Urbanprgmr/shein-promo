@@ -47,7 +47,8 @@ function setRewards() {
   if (numWinners > 0 && rewardAmount >= 0) {
     rewards = { numWinners, rewardAmount };
     localStorage.setItem('rewards', JSON.stringify(rewards));
-    alert(`${numWinners} winners will receive MVR ${rewardAmount.toFixed(2)} each.`);
+    const rewardMessage = document.getElementById('rewardMessage');
+    rewardMessage.textContent = `${numWinners} winners will receive MVR ${rewardAmount.toFixed(2)} each.`;
   } else {
     alert('Please enter valid values for number of winners and reward amount.');
   }
@@ -75,19 +76,10 @@ function drawWinners() {
   }, 2000); // 2-second animation
 }
 
-// Set background image from Cloudinary URL
-function setBackground() {
-  const bgUrl = document.getElementById('bgUrl').value;
-  if (bgUrl) {
-    document.body.style.backgroundImage = `url(${bgUrl})`;
-    localStorage.setItem('background', bgUrl);
-  }
-}
-
-// Load background image from local storage
-const savedBackground = localStorage.getItem('background');
-if (savedBackground) {
-  document.body.style.backgroundImage = `url(${savedBackground})`;
+// Toggle user list visibility
+function toggleUserList() {
+  const userListSection = document.getElementById('userListSection');
+  userListSection.style.display = userListSection.style.display === 'none' ? 'block' : 'none';
 }
 
 // Initial render
