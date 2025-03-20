@@ -100,6 +100,18 @@
       display: inline-block;
       margin-bottom: 10px;
     }
+    .delete-btn {
+      background: #ff3b2f;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .delete-btn:hover {
+      background: #d32f2f;
+    }
     @media (max-width: 600px) {
       body {
         padding: 10px;
@@ -121,6 +133,7 @@
     <div>
       <h2>Draw Winners</h2>
       <button onclick="drawWinners()">Draw Winners</button>
+      <button onclick="resetWinners()">Reset</button>
       <div class="spinner" id="spinner"><span>🎉</span> Selecting Winners...</div>
     </div>
 
