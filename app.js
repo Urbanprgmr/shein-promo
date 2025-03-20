@@ -29,6 +29,7 @@ function addUsers() {
     users = [...new Set([...users, ...newUsers])]; // Remove duplicates
     localStorage.setItem('users', JSON.stringify(users));
     renderUsers();
+    document.getElementById('userList').value = ''; // Clear textarea
   }
 }
 
@@ -74,17 +75,20 @@ function drawWinners() {
   }, 2000); // 2-second animation
 }
 
-// Background image upload
-document.getElementById('bgUpload').addEventListener('change', function (event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      document.body.style.backgroundImage = `url(${e.target.result})`;
-    };
-    reader.readAsDataURL(file);
+// Set background image from Cloudinary URL
+function setBackground() {
+  const bgUrl = document.getElementById('bgUrl').value;
+  if (bgUrl) {
+    document.body.style.backgroundImage = `url(${bgUrl})`;
+    localStorage.setItem('background', bgUrl);
   }
-});
+}
+
+// Load background image from local storage
+const savedBackground = localStorage.getItem('background');
+if (savedBackground) {
+  document.body.style.backgroundImage = `url(${savedBackground})`;
+}
 
 // Initial render
 renderUsers();
