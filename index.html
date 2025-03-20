@@ -9,7 +9,7 @@
       font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background-image: url('https://res.cloudinary.com/dwe3nze5h/image/upload/v1742499083/IMG_0361_jeevuq.jpg'); /* Cloudinary URL */
+      background-image: url('https://res.cloudinary.com/dwe3nze5h/image/upload/v1742499083/IMG_0361_jeevuq.jpg'); /* New background image */
       background-size: cover;
       background-position: center;
       color: #333;
@@ -135,6 +135,45 @@
     .search-bar {
       margin-bottom: 10px;
     }
+    /* Popup Styles */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      z-index: 1000;
+    }
+    .popup h2 {
+      margin: 0 0 20px;
+    }
+    .popup ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .popup li {
+      background: #d4edda;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .popup button {
+      margin-top: 20px;
+      background: #ff6f61;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .popup button:hover {
+      background: #ff3b2f;
+    }
     @media (max-width: 600px) {
       body {
         padding: 10px;
@@ -194,6 +233,13 @@
       <ul id="users"></ul>
       <div class="pagination" id="pagination"></div>
     </div>
+  </div>
+
+  <!-- Popup for Winners -->
+  <div class="popup" id="popup">
+    <h2>🎉 Congratulations Winners! 🎉</h2>
+    <ul id="popupWinners"></ul>
+    <button onclick="closePopup()">Close</button>
   </div>
 
   <script src="app.js"></script>
