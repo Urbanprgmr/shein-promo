@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giveaway Winner Selector</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    textarea, input, button {
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      max-width: 400px;
+      display: block;
+    }
+    .user-list, .winners-list {
+      margin: 20px 0;
+    }
+    .user-list ul, .winners-list ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .user-list li, .winners-list li {
+      background: #f4f4f4;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .winners-list li {
+      background: #d4edda;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Giveaway Winner Selector</h1>
+
+  <!-- Add Users Section -->
+  <div>
+    <h2>Add Users</h2>
+    <textarea id="userList" placeholder="Enter users separated by commas"></textarea>
+    <button onclick="addUsers()">Add Users</button>
+  </div>
+
+  <!-- User List Section -->
+  <div class="user-list">
+    <h2>User List</h2>
+    <ul id="users"></ul>
+  </div>
+
+  <!-- Set Rewards Section -->
+  <div>
+    <h2>Set Rewards</h2>
+    <input type="number" id="numWinners" placeholder="Number of Winners" min="1">
+    <input type="number" id="rewardAmount" placeholder="Reward Amount" min="0">
+    <button onclick="setRewards()">Set Rewards</button>
+  </div>
+
+  <!-- Draw Winners Section -->
+  <div>
+    <h2>Draw Winners</h2>
+    <button onclick="drawWinners()">Draw Winners</button>
+  </div>
+
+  <!-- Winners List Section -->
+  <div class="winners-list">
+    <h2>Winners</h2>
+    <ul id="winners"></ul>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
