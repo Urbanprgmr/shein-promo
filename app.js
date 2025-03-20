@@ -9,7 +9,7 @@ function renderUsers() {
   userList.innerHTML = users.map(user => `
     <li>
       ${user}
-      <button onclick="removeUser('${user}')">Remove</button>
+      <button class="delete-btn" onclick="removeUser('${user}')">Delete</button>
     </li>
   `).join('');
 }
@@ -74,6 +74,13 @@ function drawWinners() {
     renderWinners();
     spinner.style.display = 'none';
   }, 2000); // 2-second animation
+}
+
+// Reset winners
+function resetWinners() {
+  winners = [];
+  localStorage.setItem('winners', JSON.stringify(winners));
+  renderWinners();
 }
 
 // Toggle user list visibility
