@@ -6,18 +6,49 @@
   <title>Giveaway Winner Selector</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-size: cover;
+      background-position: center;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     h1 {
-      color: #333;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      width: 100%;
     }
     textarea, input, button {
       margin: 10px 0;
       padding: 10px;
       width: 100%;
-      max-width: 400px;
+      max-width: 100%;
       display: block;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button {
+      background: #ff6f61;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #ff3b2f;
     }
     .user-list, .winners-list {
       margin: 20px 0;
@@ -38,51 +69,79 @@
     .winners-list li {
       background: #d4edda;
     }
-    button {
-      background: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
+    .spinner {
+      display: none;
+      font-size: 24px;
+      text-align: center;
+      margin: 20px 0;
     }
-    button:hover {
-      background: #0056b3;
+    .spinner span {
+      animation: spin 1s linear infinite;
+      display: inline-block;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .background-upload {
+      margin-bottom: 20px;
+    }
+    .background-upload label {
+      background: #4caf50;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .background-upload input {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>Giveaway Winner Selector</h1>
+  <div class="container">
+    <h1>Giveaway Winner Selector</h1>
 
-  <!-- Add Users Section -->
-  <div>
-    <h2>Add Users</h2>
-    <textarea id="userList" placeholder="Enter users separated by commas"></textarea>
-    <button onclick="addUsers()">Add Users</button>
-  </div>
+    <!-- Background Image Upload -->
+    <div class="background-upload">
+      <label for="bgUpload">Upload Background Image</label>
+      <input type="file" id="bgUpload" accept="image/*">
+    </div>
 
-  <!-- User List Section -->
-  <div class="user-list">
-    <h2>User List</h2>
-    <ul id="users"></ul>
-  </div>
+    <!-- Add Users Section -->
+    <div>
+      <h2>Add Users</h2>
+      <textarea id="userList" placeholder="Enter users separated by commas"></textarea>
+      <button onclick="addUsers()">Add Users</button>
+    </div>
 
-  <!-- Set Rewards Section -->
-  <div>
-    <h2>Set Rewards</h2>
-    <input type="number" id="numWinners" placeholder="Number of Winners" min="1">
-    <input type="number" id="rewardAmount" placeholder="Reward Amount" min="0">
-    <button onclick="setRewards()">Set Rewards</button>
-  </div>
+    <!-- User List Section -->
+    <div class="user-list">
+      <h2>User List</h2>
+      <ul id="users"></ul>
+    </div>
 
-  <!-- Draw Winners Section -->
-  <div>
-    <h2>Draw Winners</h2>
-    <button onclick="drawWinners()">Draw Winners</button>
-  </div>
+    <!-- Set Rewards Section -->
+    <div>
+      <h2>Set Rewards</h2>
+      <input type="number" id="numWinners" placeholder="Number of Winners" min="1">
+      <input type="number" id="rewardAmount" placeholder="Reward Amount (MVR)" min="0">
+      <button onclick="setRewards()">Set Rewards</button>
+    </div>
 
-  <!-- Winners List Section -->
-  <div class="winners-list">
-    <h2>Winners</h2>
-    <ul id="winners"></ul>
+    <!-- Draw Winners Section -->
+    <div>
+      <h2>Draw Winners</h2>
+      <button onclick="drawWinners()">Draw Winners</button>
+      <div class="spinner" id="spinner"><span>🎉</span> Selecting Winners...</div>
+    </div>
+
+    <!-- Winners List Section -->
+    <div class="winners-list">
+      <h2>Winners</h2>
+      <ul id="winners"></ul>
+    </div>
   </div>
 
   <script src="app.js"></script>
