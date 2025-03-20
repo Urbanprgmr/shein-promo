@@ -17,7 +17,7 @@ function renderUsers() {
 function renderWinners() {
   const winnersList = document.getElementById('winners');
   winnersList.innerHTML = winners.map(winner => `
-    <li>${winner.name} - $${winner.reward}</li>
+    <li>${winner.name} - MVR ${winner.reward.toFixed(2)}</li>
   `).join('');
 }
 
@@ -46,26 +46,45 @@ function setRewards() {
   if (numWinners > 0 && rewardAmount >= 0) {
     rewards = { numWinners, rewardAmount };
     localStorage.setItem('rewards', JSON.stringify(rewards));
-    alert(`Rewards set: ${numWinners} winners will receive $${rewardAmount} each.`);
+    alert(`${numWinners} winners will receive MVR ${rewardAmount.toFixed(2)} each.`);
   } else {
     alert('Please enter valid values for number of winners and reward amount.');
   }
 }
 
-// Draw winners
+// Draw winners with animation
 function drawWinners() {
   if (users.length < rewards.numWinners) {
     alert('Not enough users to draw winners.');
     return;
   }
-  const shuffledUsers = [...users].sort(() => 0.5 - Math.random()); // Shuffle users
-  winners = shuffledUsers.slice(0, rewards.numWinners).map(user => ({
-    name: user,
-    reward: rewards.rewardAmount
-  }));
-  localStorage.setItem('winners', JSON.stringify(winners));
-  renderWinners();
+
+  const spinner = document.getElementById('spinner');
+  spinner.style.display = 'block';
+
+  setTimeout(() => {
+    const shuffledUsers = [...users].sort(() => 0.5 - Math.random()); // Shuffle users
+    winners = shuffledUsers.slice(0, rewards.numWinners).map(user => ({
+      name: user,
+      reward: rewards.rewardAmount
+    }));
+    localStorage.setItem('winners', JSON.stringify(winners));
+    renderWinners();
+    spinner.style.display = 'none';
+  }, 2000); // 2-second animation
 }
+
+// Background image upload
+document.getElementById('bgUpload').addEventListener('change', function (event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      document.body.style.backgroundImage = `url(${e.target.result})`;
+    };
+    reader.readAsDataURL(file);
+  }
+});
 
 // Initial render
 renderUsers();
